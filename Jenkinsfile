@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/imjhaji03/Datadrop-File-Sharing-System.git'
-            }
-        }
-
         stage('Build Backend Image') {
             steps {
                 sh 'docker build -t datadrop-backend -f Dockerfile.backend .'
@@ -21,7 +15,7 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy with Docker Compose') {
             steps {
                 sh 'docker-compose down || true'
                 sh 'docker-compose up -d --build'
